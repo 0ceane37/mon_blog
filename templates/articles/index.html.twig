@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <style>
+        .card-container {
+            display: grid;
+
+            justify-items: center;
+            margin-inline: auto;
+            max-width: 1200px;
+            padding-inline: 30px;
+            margin-block: 50px;
+            gap: 40px;
+        }
+        @media screen and (min-width: 768px) {
+            .card-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .card {
+            text-align: center;
+            width: 18rem;
+        }
+        h1 {
+            text-align: center;
+            margin-block: 30px;
+        }
+        h2 {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .card-title {
+            height: 50px;
+        }
+        img {
+            height: 25rem;
+        }
+    </style>
+    <h1>Les articles</h1>
+    <div class="card-container">
+        {% for article in articles %}
+            <div class="card">
+                <h1 class="card-title">{{ article.titre }}</h1>
+                <img src="{{ article.picture|e }}" class="card-img-top" alt="{{ article.picture|e }}">
+                <div class="card-body">
+                    <h2 class="card-title">{{ article.sousTitre }}</h2>
+                    <br>
+                    <p class="card-text">{{ article.content|slice(0,90) }}...</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ article.conclusion|slice(0,90) }}</li>
+                        <li class="list-group-item">{{ article.date|date('m-d-Y') }}</li>
+                    </ul>
+                    <a href="{{ path('articles_show', {'id': article.id}) }}" class="btn btn-primary">Détail</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

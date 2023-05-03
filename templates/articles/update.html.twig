@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un article{% endblock %}
+
+{% block body %}
+    <br>
+    <h1>Modifier l'article</h1>
+    <style>
+        form {
+            max-width: 1000px;
+            margin-inline: auto;
+        }
+        #formation {
+            margin-top: 20px;
+        }
+        #formation_startedAt .input-group,
+        #formation_finishedAt .input-group{
+            margin-bottom: 10px;
+            gap: 10px;
+        }
+        div.mb-3:nth-child(6) {
+            text-align: center;
+        }
+        h1 {
+            text-align: center;
+        }
+
+        div.mb-3:nth-child(7) {
+            text-align: center;
+            padding-block-end: 2rem;
+            padding-block-start: 2rem;
+        }
+
+    </style>
+    <br>
+
+    {{ form(articles_update) }}
+
+{%  endblock %}

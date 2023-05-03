@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les Articles{% endblock %}
+
+{% block body %}
+
+    <style>
+        .card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 90rem;
+            margin-inline: auto;
+        }
+
+        .card-title {
+            text-align: center;
+        }
+
+        .card-text {
+            text-align: center;
+        }
+
+        .list-group {
+            text-align: center;
+        }
+
+        .card > div:nth-child(6) {
+            padding-block-start: 2rem;
+        }
+
+        a.btn:nth-child(1) {
+            margin-inline-end: 2rem;
+        }
+
+    </style>
+    <br>
+    <div class="card">
+        <h1 class="card-title">{{ article.titre }}</h1>
+        <br>
+        <img style="max-width: 28rem;" src="{{ article.picture|e }}" class="card-img-top" alt="{{ article.picture|e }}">
+        <div class="card-body">
+            <h2 class="card-title">{{ article.sousTitre }}</h2>
+            <br>
+            <p class="card-text">{{ article.content }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{ article.conclusion }}</li>
+            <li class="list-group-item">{{ article.date|date('m-d-Y') }}</li>
+        </ul>
+        <div>
+            <a href="{{ path('articles') }}" class="btn btn-primary">Retour</a>
+            <a href="{{ path('update', {'id': article.id}) }}" class="btn btn-primary">Modifier</a>
+        </div>
+        <br>
+    </div>
+
+
+{% endblock %}
