@@ -46,7 +46,7 @@ class ArticleType extends AbstractType
                 ]
             ])
             ->add('date',DateTimeType::class)
-            ->add('submit', SubmitType::class)
+            ->add('Envoyer', SubmitType::class)
         ;
     }
 

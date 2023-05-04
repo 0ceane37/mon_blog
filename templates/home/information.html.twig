@@ -3,7 +3,12 @@
 {% block title %}Mes Informations{% endblock %}
 
 {% block body %}
-    <div class="card mb-3">
+    <style>
+        .card {
+            border: none;
+        }
+    </style>
+    <div class="card">
     <h2 class="card-header text-center">Qui suis je ?</h2>
     <div class="card-body">
         <h3 class="card-title text-center">Je me prénomme Emma</h3>
@@ -12,7 +17,7 @@
         <img src={{ asset ('media/human_ours.jpg')}} width="25%" height="550"  aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle"/>
     </div>
 
-    <div class="card-body">
+    <div class="card">
         <p class="card-text text-center">Je suis une femme passionnée par les animaux depuis mon plus jeune âge.
             J'ai grandi entourée de chiens, de chats, d'oiseaux et même de petits rongeurs.
             Cette passion m'a conduite à suivre des études en biologie et en écologie pour mieux comprendre le monde animal.

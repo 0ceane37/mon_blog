@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ArticlesController extends AbstractController
 {
@@ -29,6 +30,7 @@ class ArticlesController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'], priority: 2)]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request, ArticleRepository $articleRepository): Response
     {
         $article = new Article();
