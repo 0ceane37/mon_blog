@@ -1,35 +1,69 @@
+{% set route_name = app.request.attributes.get('_route') %}
+
 <header>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="{{ path('home_index') }}">Mon blog</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ path('home_index') }}">Accueil
-                        <span class="visually-hidden">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"href="{{ path('home_information') }}">Mes informations</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"href="{{ path('articles') }}">Mes Articles</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"href="{{ path('new') }}">Ajouter un article</a>
-                </li>
-            </ul>
-            <form class="d-flex">
-                {% if app.user %}
-                <a href="{{ path('app_logout') }}" class="btn btn-secondary my-2 my-sm-0">Se déconnecter</a>
-                {% else %}
-                    <a href="{{ path('app_logout') }}" class="btn btn-secondary my-2 my-sm-0">Se connecter</a>
-                {% endif %}
-            </form>
+    <style>
+        .btn {
+            margin-inline-end: 1rem;
+        }
+        .text-home {
+            padding-block-start: 1rem;
+            padding-inline-end: 1rem;
+            color: white;
+            font-weight: bold;
+        }
+        .navbar-nav .nav-link.active {
+            background-color: white;
+            color: black;
+        }
+    </style>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ path('home_index') }}">Mon blog</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if route_name == 'home_index' %}active{% endif %}"
+                           href="{{ path('home_index') }}">Accueil
+                            <span class="visually-hidden">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if route_name == 'home_information' %}active{% endif %}"
+                           href="{{ path('home_information') }}">Mes informations</a>
+                    </li>
+                    <li class="nav-item">
+                        {% if is_granted("ROLE_LECTEUR") or is_granted("ROLE_AUTEUR") %}
+                            <a class="nav-link {% if route_name == 'articles' %}active{% endif %}"
+                               href="{{ path('articles') }}">Mes Articles</a>
+                        {% endif %}
+                    </li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if route_name == 'new' %}active{% endif %}"
+                               href="{{ path('new') }}">Ajouter un article</a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <form class="d-flex">
+
+                    {% if is_granted("ROLE_LECTEUR") or is_granted("ROLE_AUTEUR") %}
+                        <div>
+                            <p class="text-home">Bienvenue {{ app.user.firstname }} !</p>
+                        </div>
+                    {% else %}
+                        <a href="{{ path('register') }}" class="btn btn-secondary my-2 my-sm-0"> S'inscrire</a>
+                    {% endif %}
+                    {% if app.user %}
+                        <a href="{{ path('app_logout') }}" class="btn btn-secondary my-2 my-sm-0">Se déconnecter</a>
+                    {% else %}
+                        <a href="{{ path('app_login') }}" class="btn btn-secondary my-2 my-sm-0">Se connecter</a>
+                    {% endif %}
+                </form>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 </header>

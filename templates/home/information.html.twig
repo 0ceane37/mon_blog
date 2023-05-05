@@ -7,6 +7,12 @@
         .card {
             border: none;
         }
+        .title {
+            max-width: 10rem;
+            text-align: center;
+            display: flex;
+            margin: auto;
+        }
     </style>
     <div class="card">
     <h2 class="card-header text-center">Qui suis je ?</h2>
@@ -14,30 +20,43 @@
         <h3 class="card-title text-center">Je me prénomme Emma</h3>
     </div>
     <div class="d-flex justify-content-center">
-        <img src={{ asset ('media/human_ours.jpg')}} width="25%" height="550"  aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle"/>
+        <img src={{ asset ('media/human_ours.jpg') }} width="25%" height="550" aria-label="Placeholder: Image cap"
+             focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180"
+             style="font-size:1.125rem;text-anchor:middle"/>
     </div>
 
     <div class="card">
-        <p class="card-text text-center">Je suis une femme passionnée par les animaux depuis mon plus jeune âge.
-            J'ai grandi entourée de chiens, de chats, d'oiseaux et même de petits rongeurs.
-            Cette passion m'a conduite à suivre des études en biologie et en écologie pour mieux comprendre le monde animal.
-        </p>
-        <p class="card-text text-center">Je travaille comme vétérinaire dans une clinique pour animaux de compagnie.
-            Je suis passionnée par mon travail et m'investit pleinement pour soigner les animaux malades et aider
-            les propriétaires à mieux comprendre leurs besoins. Je suis toujours prête à donner des conseils pour
-            améliorer le bien-être des animaux et à sensibiliser les gens à la cause animale..
-        <p>
-        <p class="card-text text-center">En dehors de mon travail, je passe beaucoup de temps à m'occuper de mes propres
-            animaux de compagnie. J'ai un chien et deux chats qui sont comme mes enfants. J'aime passer du temps avec
-            eux, jouer avec eux et leur offrir les meilleurs soins possibles. Je suis également membre active
-            d'une association de protection des animaux et participe à des événements pour sensibiliser
-            les gens à la protection de la faune sauvage.
-        <p>
+    <p class="card-text text-center">Je suis une femme passionnée par les animaux depuis mon plus jeune âge.
+        J'ai grandi entourée de chiens, de chats, d'oiseaux et même de petits rongeurs.
+        Cette passion m'a conduite à suivre des études en biologie et en écologie pour mieux comprendre le monde animal.
+    </p>
+    <p class="card-text text-center">Je travaille comme vétérinaire dans une clinique pour animaux de compagnie.
+        Je suis passionnée par mon travail et m'investit pleinement pour soigner les animaux malades et aider
+        les propriétaires à mieux comprendre leurs besoins. Je suis toujours prête à donner des conseils pour
+        améliorer le bien-être des animaux et à sensibiliser les gens à la cause animale..
+    <p>
+    <p class="card-text text-center">En dehors de mon travail, je passe beaucoup de temps à m'occuper de mes propres
+        animaux de compagnie. J'ai un chien et deux chats qui sont comme mes enfants. J'aime passer du temps avec
+        eux, jouer avec eux et leur offrir les meilleurs soins possibles. Je suis également membre active
+        d'une association de protection des animaux et participe à des événements pour sensibiliser
+        les gens à la protection de la faune sauvage.
+    <p>
 
-        <p class="card-text text-center">Je suis une femme douce et attentionnée, qui a une grande empathie pour les animaux. Ma passion pour les
-            animaux me donne une grande force et je travaille sans relâche pour faire entendre
-            leur voix et améliorer leur sort. Je suis une inspiration pour tous ceux qui partagent ma passion
-            pour les animaux et qui souhaitent faire une différence dans le monde animal.
-        <p>
+    <p class="card-text text-center">Je suis une femme douce et attentionnée, qui a une grande empathie pour les
+        animaux. Ma passion pour les
+        animaux me donne une grande force et je travaille sans relâche pour faire entendre
+        leur voix et améliorer leur sort. Je suis une inspiration pour tous ceux qui partagent ma passion
+        pour les animaux et qui souhaitent faire une différence dans le monde animal.
+    <p>
+    <br>
+
+        {% if is_granted("ROLE_LECTEUR") or is_granted("ROLE_AUTEUR") %}
+        <a href="{{ path('articles') }}" class="btn btn-primary my-2 my-sm-0 title">Les Articles</a>
+        {% else %}
+    <p class="text-center">Si vous souhaitez consulter mes articles, veuillez cliquer sur le lien "s'inscrire"
+        pour
+        créer un compte et vous connecter.</p>
+    <a href="{{ path('register') }}" class="btn btn-primary my-2 my-sm-0 title"> S'inscrire</a>
+    {% endif %}
 
 {% endblock %}

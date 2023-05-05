@@ -24,6 +24,7 @@ class RegisterController extends AbstractController
 
         if ($registerForm->isSubmitted() && $registerForm->isValid()) {
             $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
+            $user->setRoles(["ROLE_LECTEUR"]);
 
             $userRepository->save($user, true);
 
@@ -32,6 +33,7 @@ class RegisterController extends AbstractController
 
         return $this->render('register/index.html.twig', [
             'register_form' => $registerForm->createView()
+
         ]);
     }
 }

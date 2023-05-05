@@ -2,63 +2,90 @@
 
 {% block title %}Bienvenue sur mon blog{% endblock %}
 
-{% block header %} {{ path('_header.html.twing')}} {% endblock %}
+{% block header %} {{ path('_header.html.twing') }} {% endblock %}
 
 {% block body %}
+    <style>
+        .card {
+            border: none;
+        }
+        .title {
+            max-width: 10rem;
+            text-align: center;
+            margin: auto;
+        }
+    </style>
 
-<div class="card mb-3">
-    <h2 class="card-header text-center">Le blog</h2>
-    <div class="card-body">
-        <h3 class="card-title text-center">Les animaux une passion</h3>
+    <div class="card mb-3">
+        <h2 class="card-header text-center">Le blog</h2>
+        <div class="card-body">
+            <h3 class="card-title text-center">Les animaux une passion</h3>
+        </div>
+        <div class="d-flex justify-content-center">
+            <img src={{ asset ('media/leopard_img.png') }} width="25%" height="550" aria-label="Placeholder: Image cap"
+                 focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180"
+                 style="font-size:1.125rem;text-anchor:middle"/>
+        </div>
+        <div class="card-body">
+            <p class="card-text text-center">Les animaux sont une partie importante de notre monde naturel. Ils ont une
+                grande diversité d'espèces, chacune ayant ses propres caractéristiques et adaptations pour survivre dans
+                son environnement. Les animaux peuvent être trouvés dans une variété de habitats, y compris dans les
+                forêts,
+                les océans, les déserts, les montagnes, et même dans les zones urbaines.
+            </p>
+            <p class="card-text text-center">Les animaux ont également une grande importance pour les humains. Les
+                animaux
+                de compagnie, comme les chiens et les chats, sont souvent considérés comme des membres de la famille,
+                tandis que les animaux domestiques, comme les vaches, les poulets et les porcs, sont utilisés pour
+                la production de nourriture. Les animaux sont également utilisés dans la recherche scientifique pour
+                améliorer la santé humaine et traiter les maladies.
+            <p>
+            <p class="card-text text-center">Malheureusement, les animaux sont également menacés par l'activité humaine,
+                tels que la perte d'habitat, la chasse illégale, la pollution et le changement climatique. Des espèces
+                entières sont en danger d'extinction à cause de ces activités humaines. C'est pourquoi il est important
+                de
+                prendre des mesures pour protéger les animaux et leur habitat naturel.
+            <p>
+            <p class="card-text text-center">Une des manières dont nous pouvons protéger les animaux est de réduire
+                notre empreinte carbone. Les émissions de gaz à effet de serre causées par les activités humaines
+                sont responsables du changement climatique, qui a un impact sur les habitats naturels des animaux.
+                En réduisant notre empreinte carbone, nous pouvons contribuer à préserver les habitats naturels et
+                les espèces animales qui en dépendent.
+            <p>
+            <p class="card-text text-center">Nous pouvons également aider les animaux en évitant les produits qui
+                utilisent des ingrédients issus de la chasse illégale ou de la destruction de l'habitat. Les produits
+                à base d'ivoire, de peau de serpent, ou de fourrure sont souvent issus de la chasse illégale et ont un
+                impact négatif sur les populations animales. En choisissant des produits qui utilisent des ingrédients
+                durables et respectueux de l'environnement, nous pouvons aider à réduire la demande pour ces produits
+                dangereux.
+            <p>
+            <p class="card-text text-center">Enfin, nous pouvons soutenir les organisations qui travaillent à protéger
+                les animaux et leur habitat. Les organisations comme le Fonds mondial pour la nature (WWF) ou la Société
+                pour la protection des animaux (SPA) travaillent à protéger les animaux et leurs habitats à travers
+                le monde. En faisant un don ou en faisant du bénévolat auprès de ces organisations, nous pouvons aider
+                à protéger les animaux et leur habitat.
+            <p>
+            <p class="card-text text-center">En conclusion, les animaux sont une partie importante de notre monde
+                naturel
+                et sont essentiels pour maintenir l'équilibre de l'écosystème. Cependant, ils sont également menacés par
+                l'activité humaine, et il est de notre devoir de prendre des mesures pour protéger les animaux et leur
+                habitat naturel. En réduisant notre empreinte carbone, en évitant les produits issus de la chasse
+                illégale
+                ou de la destruction de l'habitat.
+            <p>
+
+        </div>
+        <br>
+
+
+        {% if is_granted("ROLE_LECTEUR") or is_granted("ROLE_AUTEUR") %}
+            <a href="{{ path('articles') }}" class="btn btn-primary my-2 my-sm-0 title">Les Articles</a>
+        {% else %}
+            <p class="text-center">Si vous souhaitez consulter mes articles, veuillez cliquer sur le lien "s'inscrire"
+                pour
+                créer un compte et vous connecter.</p>
+            <a href="{{ path('register') }}" class="btn btn-primary my-2 my-sm-0 title"> S'inscrire</a>
+        {% endif %}
     </div>
-    <div class="d-flex justify-content-center">
-    <img src={{ asset ('media/leopard_img.png')}} width="25%" height="550"  aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle"/>
-</div>
-    <div class="card-body">
-        <p class="card-text text-center">Les animaux sont une partie importante de notre monde naturel. Ils ont une
-            grande diversité d'espèces, chacune ayant ses propres caractéristiques et adaptations pour survivre dans
-            son environnement. Les animaux peuvent être trouvés dans une variété de habitats, y compris dans les forêts,
-            les océans, les déserts, les montagnes, et même dans les zones urbaines.
-        </p>
-        <p class="card-text text-center">Les animaux ont également une grande importance pour les humains. Les animaux
-            de compagnie, comme les chiens et les chats, sont souvent considérés comme des membres de la famille,
-            tandis que les animaux domestiques, comme les vaches, les poulets et les porcs, sont utilisés pour
-            la production de nourriture. Les animaux sont également utilisés dans la recherche scientifique pour
-            améliorer la santé humaine et traiter les maladies.
-        <p>
-        <p class="card-text text-center">Malheureusement, les animaux sont également menacés par l'activité humaine,
-            tels que la perte d'habitat, la chasse illégale, la pollution et le changement climatique. Des espèces
-            entières sont en danger d'extinction à cause de ces activités humaines. C'est pourquoi il est important de
-            prendre des mesures pour protéger les animaux et leur habitat naturel.
-        <p>
-        <p class="card-text text-center">Une des manières dont nous pouvons protéger les animaux est de réduire
-            notre empreinte carbone. Les émissions de gaz à effet de serre causées par les activités humaines
-            sont responsables du changement climatique, qui a un impact sur les habitats naturels des animaux.
-            En réduisant notre empreinte carbone, nous pouvons contribuer à préserver les habitats naturels et
-            les espèces animales qui en dépendent.
-        <p>
-        <p class="card-text text-center">Nous pouvons également aider les animaux en évitant les produits qui
-            utilisent des ingrédients issus de la chasse illégale ou de la destruction de l'habitat. Les produits
-            à base d'ivoire, de peau de serpent, ou de fourrure sont souvent issus de la chasse illégale et ont un
-            impact négatif sur les populations animales. En choisissant des produits qui utilisent des ingrédients
-            durables et respectueux de l'environnement, nous pouvons aider à réduire la demande pour ces produits dangereux.
-        <p>
-        <p class="card-text text-center">Enfin, nous pouvons soutenir les organisations qui travaillent à protéger
-            les animaux et leur habitat. Les organisations comme le Fonds mondial pour la nature (WWF) ou la Société
-            pour la protection des animaux (SPA) travaillent à protéger les animaux et leurs habitats à travers
-            le monde. En faisant un don ou en faisant du bénévolat auprès de ces organisations, nous pouvons aider
-            à protéger les animaux et leur habitat.
-        <p>
-        <p class="card-text text-center">En conclusion, les animaux sont une partie importante de notre monde naturel
-            et sont essentiels pour maintenir l'équilibre de l'écosystème. Cependant, ils sont également menacés par
-            l'activité humaine, et il est de notre devoir de prendre des mesures pour protéger les animaux et leur
-            habitat naturel. En réduisant notre empreinte carbone, en évitant les produits issus de la chasse illégale
-            ou de la destruction de l'habitat.
-        <p>
-
-
-
-    </div>
-</div>
 
 {% endblock %}

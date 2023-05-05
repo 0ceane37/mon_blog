@@ -3,11 +3,30 @@
 {% block title %}Inscrivez-vous !{% endblock %}
 
 {% block body %}
-<h1>S'inscrire</h1>
+    <style>
+        .title-one{
+            margin-inline-start: 3rem;
+            margin-block-start: 2rem;
+        }
+        .mb-3{
+            margin-block-start: 2rem;
+            margin-inline-start: 3rem;
+        }
+        .button{
+            display: flex;
+            margin: auto;
+        }
+        .form-control{
+            width: 90%;
+        }
+
+    </style>
+<h1 class="title-one">S'inscrire</h1>
     <hr>
     {{ form_start(register_form) }}
         {{ form_widget(register_form) }}
-    <input type="submit" value="S'inscrire">
+    <br>
+    <input class="btn btn-primary button" type="submit" value="S'inscrire">
     {{ form_end(register_form) }}
 
 {% endblock %}

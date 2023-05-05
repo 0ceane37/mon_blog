@@ -50,7 +50,10 @@
         </ul>
         <div>
             <a href="{{ path('articles') }}" class="btn btn-primary">Retour</a>
+
+            {% if is_granted('ROLE_AUTEUR') %}
             <a href="{{ path('update', {'id': article.id}) }}" class="btn btn-primary">Modifier</a>
+            {% endif %}
         </div>
         <br>
     </div>
