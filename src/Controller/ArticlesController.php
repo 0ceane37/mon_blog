@@ -33,12 +33,12 @@ class ArticlesController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request, ArticleRepository $articleRepository): Response
     {
-        $article = new Article();
+        $article    = new Article();
         $articleAdd = $this->createForm(ArticleType::class, $article);
 
         $articleAdd->handleRequest($request);
 
-        if($articleAdd->isSubmitted() && $articleAdd->isValid()) {
+        if ($articleAdd->isSubmitted() && $articleAdd->isValid()) {
             $articleRepository->save($article, true);
         }
         return $this->render('articles/new.html.twig', [
@@ -61,4 +61,17 @@ class ArticlesController extends AbstractController
             'articles_update' => $articleUpdate->createView()
         ]);
     }
+
+    #[Route('/{id}/delete', name: 'delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function delete(Request $request, Article $article, ArticleRepository $articleRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('_token'))) {
+            $articleRepository->remove($article, true);
+            $this->addFlash('success', 'L\'article' . $article->getTitre() . '" a bien été supprimée !');
+        }
+
+        return $this->redirectToRoute('articles', [], Response::HTTP_SEE_OTHER);
+    }
+
 }

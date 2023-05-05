@@ -28,9 +28,9 @@
         .card > div:nth-child(6) {
             padding-block-start: 2rem;
         }
-
-        a.btn:nth-child(1) {
-            margin-inline-end: 2rem;
+        
+        .btn-list{
+            display: flex;
         }
 
     </style>
@@ -48,11 +48,15 @@
             <li class="list-group-item">{{ article.conclusion }}</li>
             <li class="list-group-item">{{ article.date|date('m-d-Y') }}</li>
         </ul>
-        <div>
+        <div class="btn-list">
             <a href="{{ path('articles') }}" class="btn btn-primary">Retour</a>
 
             {% if is_granted('ROLE_AUTEUR') %}
             <a href="{{ path('update', {'id': article.id}) }}" class="btn btn-primary">Modifier</a>
+            {% endif %}
+
+            {% if is_granted('ROLE_ADMIN') %}
+                {{ include('partials/_delete_form.html.twig') }}
             {% endif %}
         </div>
         <br>
